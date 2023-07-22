@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bup4ixv4sjplm"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/trampoline.gd" id="1_cr1b3"]
+[ext_resource type="Texture2D" uid="uid://c8jxpsq8g6mta" path="res://Assets/Items/spring.png" id="1_um6ql"]
+[ext_resource type="Texture2D" uid="uid://dv6yfw2200jvv" path="res://Assets/Items/spring_in.png" id="2_twdjr"]
+[ext_resource type="Texture2D" uid="uid://dyegftef8yluo" path="res://Assets/Items/spring_out.png" id="3_ir8yt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tlgh0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_um6ql")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_twdjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_um6ql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ir8yt")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijlnj"]
+size = Vector2(140, 110)
+
+[node name="Trampoline" type="Area2D"]
+z_index = -1
+collision_layer = 0
+script = ExtResource("1_cr1b3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tlgh0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_ijlnj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

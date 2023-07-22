@@ -1,0 +1,35 @@
+[gd_scene load_steps=10 format=3 uid="uid://4cdmu6hvylk8"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/platform.gd" id="1_fw035"]
+[ext_resource type="Texture2D" uid="uid://p0ysqnsxnewd" path="res://Assets/Environment/ground_grass_small.png" id="2_b276x"]
+[ext_resource type="Texture2D" uid="uid://cuewo3uj7ix4x" path="res://Assets/Environment/grass1.png" id="2_x1gdg"]
+[ext_resource type="Texture2D" uid="uid://dligrhq2xbul8" path="res://Assets/Environment/grass_brown1.png" id="3_jj1pd"]
+[ext_resource type="Texture2D" uid="uid://cabijc5xbqp6o" path="res://Assets/Environment/grass2.png" id="4_ukqa1"]
+[ext_resource type="Texture2D" uid="uid://ds1pqdcdja72m" path="res://Assets/Environment/grass_brown2.png" id="5_vt77c"]
+[ext_resource type="Texture2D" uid="uid://biel86emjsj7a" path="res://Assets/Environment/mushroom_brown.png" id="6_ybalk"]
+[ext_resource type="Texture2D" uid="uid://dkhjdp1ortf6m" path="res://Assets/Environment/mushroom_red.png" id="7_v08f4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojwaf"]
+size = Vector2(200, 0)
+
+[node name="Platform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_fw035")
+dec = Array[CompressedTexture2D]([ExtResource("2_x1gdg"), ExtResource("3_jj1pd"), ExtResource("4_ukqa1"), ExtResource("5_vt77c"), ExtResource("6_ybalk"), ExtResource("7_v08f4")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.48363e-06, -2.6226e-06)
+scale = Vector2(0.995025, 1.06383)
+texture = ExtResource("2_b276x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -50)
+shape = SubResource("RectangleShape2D_ojwaf")
+one_way_collision = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -300)
+scale = Vector2(10, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

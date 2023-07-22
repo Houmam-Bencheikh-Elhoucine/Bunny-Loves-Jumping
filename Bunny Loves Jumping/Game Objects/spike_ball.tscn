@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl06wbnro00e5"]
+
+[ext_resource type="Texture2D" uid="uid://wngyhlsaneda" path="res://Assets/Enemies/spikeBall1.png" id="1_5cx6m"]
+[ext_resource type="Script" path="res://Scripts/Enemies/spike_ball.gd" id="1_gfls1"]
+[ext_resource type="Texture2D" uid="uid://cl80jefa026ek" path="res://Assets/Enemies/spikeBall_2.png" id="2_vredb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vmqa0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5cx6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vredb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uwbv6"]
+radius = 50.0
+
+[node name="SpikeBall" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_gfls1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vmqa0")
+frame_progress = 0.526815
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uwbv6")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-50, -400, 100, 20)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,151 @@
+[gd_scene load_steps=16 format=3 uid="uid://cbq7tt5c36yb0"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_noj3v"]
+[ext_resource type="Texture2D" uid="uid://33qviy3ovmxa" path="res://Assets/Players/bunny1_hurt.png" id="2_wrtm5"]
+[ext_resource type="Texture2D" uid="uid://38s6s335yttw" path="res://Assets/Players/bunny1_jump.png" id="3_sm8db"]
+[ext_resource type="Texture2D" uid="uid://cd54qlybecq6a" path="res://Assets/Players/bunny1_stand.png" id="4_irmhl"]
+[ext_resource type="Texture2D" uid="uid://cwv7g8823yy8r" path="res://Assets/Players/bunny1_walk1.png" id="5_biexb"]
+[ext_resource type="Texture2D" uid="uid://by5hf35ijgl6t" path="res://Assets/Players/bunny1_walk2.png" id="6_s2emq"]
+[ext_resource type="Texture2D" uid="uid://dm2c2t16jwo3p" path="res://Assets/Players/bunny2_hurt.png" id="7_go1sn"]
+[ext_resource type="Texture2D" uid="uid://8ayw2c6wsaxr" path="res://Assets/Particles/smoke.png" id="7_tbhaw"]
+[ext_resource type="Texture2D" uid="uid://7bmjo364sq1s" path="res://Assets/Players/bunny2_jump.png" id="8_13o4d"]
+[ext_resource type="Texture2D" uid="uid://cybdnfnflts4v" path="res://Assets/Players/bunny2_stand.png" id="9_b4nur"]
+[ext_resource type="Texture2D" uid="uid://cjudnkixikg8a" path="res://Assets/Players/bunny2_walk1.png" id="10_0yqbe"]
+[ext_resource type="Texture2D" uid="uid://bncrv3t3d5ree" path="res://Assets/Players/bunny2_walk2.png" id="11_s3xmj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_01u8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wrtm5")
+}],
+"loop": true,
+"name": &"boydead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sm8db")
+}],
+"loop": true,
+"name": &"boyflying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_irmhl")
+}],
+"loop": true,
+"name": &"boyidle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_biexb")
+}],
+"loop": true,
+"name": &"boyjump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_biexb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s2emq")
+}],
+"loop": true,
+"name": &"boywalk",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_go1sn")
+}],
+"loop": true,
+"name": &"girldead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_13o4d")
+}],
+"loop": true,
+"name": &"girlflying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_b4nur")
+}],
+"loop": true,
+"name": &"girlidle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0yqbe")
+}],
+"loop": true,
+"name": &"girljump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0yqbe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s3xmj")
+}],
+"loop": true,
+"name": &"girlwalk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5234h"]
+radius = 60.0
+height = 150.0
+
+[sub_resource type="Gradient" id="Gradient_vkf3j"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_noj3v")
+JUMP_IMPULSE = 1700.0
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_01u8w")
+animation = &"girlwalk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 26)
+shape = SubResource("CapsuleShape2D_5234h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.901265, 1.03061)
+zoom = Vector2(0.5, 0.5)
+limit_left = 0
+limit_top = -1215752191
+limit_right = 1440
+limit_bottom = 600
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(10, 10)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 100)
+amount = 20
+texture = ExtResource("7_tbhaw")
+gravity = Vector2(0, 0)
+angular_velocity_max = 200.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_vkf3j")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

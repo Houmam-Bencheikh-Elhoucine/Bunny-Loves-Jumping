@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccccuofg6u80n"]
+
+[ext_resource type="Script" path="res://Scripts/Collectibles/carrot.gd" id="1_fv5nm"]
+[ext_resource type="Texture2D" uid="uid://digyncpph6avh" path="res://Assets/Items/carrot.png" id="1_h48ch"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qf1tk"]
+radius = 14.1421
+height = 88.3884
+
+[node name="Carrot" type="Area2D"]
+script = ExtResource("1_fv5nm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_h48ch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+rotation = -0.785398
+shape = SubResource("CapsuleShape2D_qf1tk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

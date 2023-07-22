@@ -1,0 +1,37 @@
+[gd_scene load_steps=11 format=3 uid="uid://0so146rfw1kf"]
+
+[ext_resource type="Texture2D" uid="uid://dgteck8k5c0ev" path="res://Assets/Environment/ground_grass.png" id="1_3kxfk"]
+[ext_resource type="Script" path="res://Scripts/Environment/platform.gd" id="1_4tu3f"]
+[ext_resource type="Texture2D" uid="uid://cuewo3uj7ix4x" path="res://Assets/Environment/grass1.png" id="2_krukn"]
+[ext_resource type="Texture2D" uid="uid://cabijc5xbqp6o" path="res://Assets/Environment/grass2.png" id="3_o2ak2"]
+[ext_resource type="Texture2D" uid="uid://ch3onu3gd7xow" path="res://Assets/Environment/cactus.png" id="4_07qyb"]
+[ext_resource type="Texture2D" uid="uid://dligrhq2xbul8" path="res://Assets/Environment/grass_brown1.png" id="5_4tak0"]
+[ext_resource type="Texture2D" uid="uid://ds1pqdcdja72m" path="res://Assets/Environment/grass_brown2.png" id="6_l33mj"]
+[ext_resource type="Texture2D" uid="uid://biel86emjsj7a" path="res://Assets/Environment/mushroom_brown.png" id="7_5x2da"]
+[ext_resource type="Texture2D" uid="uid://dkhjdp1ortf6m" path="res://Assets/Environment/mushroom_red.png" id="8_n4juh"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4ortu"]
+a = Vector2(-190, -5)
+b = Vector2(180, -5)
+
+[node name="Platform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_4tu3f")
+dec = Array[CompressedTexture2D]([ExtResource("2_krukn"), ExtResource("3_o2ak2"), ExtResource("4_07qyb"), ExtResource("5_4tak0"), ExtResource("6_l33mj"), ExtResource("7_5x2da"), ExtResource("8_n4juh")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.4782e-05, -2.6226e-06)
+scale = Vector2(1.05263, 1.06383)
+texture = ExtResource("1_3kxfk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -45)
+shape = SubResource("SegmentShape2D_4ortu")
+one_way_collision = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(6.19888e-06, -400)
+scale = Vector2(20, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

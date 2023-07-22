@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpr07wcrm4r1a"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Wingman.gd" id="1_ckc1a"]
+[ext_resource type="Texture2D" uid="uid://dx7ff21ejf37o" path="res://Assets/Enemies/wingMan1.png" id="2_sp4td"]
+[ext_resource type="Texture2D" uid="uid://bextn02pexcid" path="res://Assets/Enemies/wingMan2.png" id="3_lbn6s"]
+[ext_resource type="Texture2D" uid="uid://cvlvxqkhnax28" path="res://Assets/Enemies/wingMan3.png" id="4_ni32u"]
+[ext_resource type="Texture2D" uid="uid://bep84855pr37r" path="res://Assets/Enemies/wingMan4.png" id="5_ql15w"]
+[ext_resource type="Texture2D" uid="uid://cwl2gg1gjctc1" path="res://Assets/Enemies/wingMan5.png" id="6_vg68o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dexha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sp4td")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lbn6s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ni32u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ql15w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vg68o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ql15w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ni32u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lbn6s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shk45"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_af3v3"]
+radius = 750.0
+
+[node name="Wingman" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_ckc1a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dexha")
+frame_progress = 0.241302
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_shk45")
+
+[node name="Player_detector" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_detector"]
+shape = SubResource("CircleShape2D_af3v3")
+debug_color = Color(0.976471, 0, 0.407843, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-200, -400, 400, 20)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Player_detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

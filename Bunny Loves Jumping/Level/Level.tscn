@@ -1,0 +1,484 @@
+[gd_scene load_steps=20 format=3 uid="uid://bssha61vk8pyf"]
+
+[ext_resource type="Script" path="res://Scripts/Level.gd" id="1_iqw01"]
+[ext_resource type="Script" path="res://Scripts/Algorithms/PlatformSpawner.gd" id="2_8uopc"]
+[ext_resource type="PackedScene" uid="uid://0so146rfw1kf" path="res://Game Objects/platform.tscn" id="3_ytcv7"]
+[ext_resource type="PackedScene" uid="uid://4cdmu6hvylk8" path="res://Game Objects/platform_small.tscn" id="4_fpy7i"]
+[ext_resource type="Script" path="res://Scripts/Algorithms/EnemySpawner.gd" id="5_11vlk"]
+[ext_resource type="PackedScene" uid="uid://cbq7tt5c36yb0" path="res://Game Objects/player.tscn" id="6_ui5vi"]
+[ext_resource type="Script" path="res://Scripts/UI/HUD.gd" id="7_bctrj"]
+[ext_resource type="Texture2D" uid="uid://fjijla27vqyh" path="res://Assets/HUD/coin_silver.png" id="8_1y63v"]
+[ext_resource type="Texture2D" uid="uid://cmvd7vsgbvysj" path="res://Assets/HUD/carrots.png" id="9_xf6kk"]
+[ext_resource type="Script" path="res://Scripts/UI/Menu.gd" id="10_f1pw0"]
+[ext_resource type="Texture2D" uid="uid://c0a2asipxrlk" path="res://Assets/Players/bunny1_ready.png" id="11_6posq"]
+[ext_resource type="Texture2D" uid="uid://38s6s335yttw" path="res://Assets/Players/bunny1_jump.png" id="12_qfjtb"]
+[ext_resource type="Texture2D" uid="uid://cd54qlybecq6a" path="res://Assets/Players/bunny1_stand.png" id="13_1br3j"]
+[ext_resource type="Texture2D" uid="uid://clkitief4ygvf" path="res://Assets/Players/bunny2_ready.png" id="14_34gmv"]
+[ext_resource type="Texture2D" uid="uid://7bmjo364sq1s" path="res://Assets/Players/bunny2_jump.png" id="15_wbu5d"]
+[ext_resource type="Texture2D" uid="uid://cybdnfnflts4v" path="res://Assets/Players/bunny2_stand.png" id="16_ixy5o"]
+
+[sub_resource type="Animation" id="Animation_7plis"]
+resource_name = "Show_characters"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boy:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("girl:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.75]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("boy:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("girl:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("boy:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("girl:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("boy:anchor_left")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.25]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("girl:anchor_right")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.75]
+}
+
+[sub_resource type="Animation" id="Animation_4po67"]
+resource_name = "hide_characters"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boy:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("girl:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.75, 0.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("boy:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("girl:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("boy:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("girl:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("boy:anchor_left")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 0.5]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("girl:anchor_right")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.75, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7htbw"]
+_data = {
+"Show_characters": SubResource("Animation_7plis"),
+"hide_characters": SubResource("Animation_4po67")
+}
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_iqw01")
+metadata/_edit_vertical_guides_ = [1440.0]
+
+[node name="PlatformSpawner" type="Node2D" parent="."]
+script = ExtResource("2_8uopc")
+max_height = 600
+max_spawn = 1000
+same_spawn = 3
+platforms = Array[PackedScene]([ExtResource("3_ytcv7"), ExtResource("4_fpy7i")])
+
+[node name="InitialPlatform" parent="PlatformSpawner" instance=ExtResource("3_ytcv7")]
+position = Vector2(720, 600)
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_11vlk")
+
+[node name="Player" parent="." instance=ExtResource("6_ui5vi")]
+position = Vector2(720, 440)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_bctrj")
+
+[node name="Score" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 32
+text = "Score:
+"
+vertical_alignment = 1
+
+[node name="Coins" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = " X 00"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Coins"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+texture = ExtResource("8_1y63v")
+expand_mode = 1
+
+[node name="Carrots" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.083
+anchor_right = 1.0
+anchor_bottom = 0.083
+offset_left = -72.16
+offset_right = -0.160034
+offset_bottom = 38.48
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = " X 00"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Carrots"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+texture = ExtResource("9_xf6kk")
+expand_mode = 1
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_f1pw0")
+
+[node name="Title" type="Label" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.25
+offset_left = -83.0
+offset_top = -13.0
+offset_right = 83.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bunny Loves Jumping"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="boy" type="TextureButton" parent="CanvasLayer/Menu"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.5
+anchor_right = 0.25
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -95.5
+offset_right = 60.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("11_6posq")
+texture_pressed = ExtResource("12_qfjtb")
+texture_hover = ExtResource("13_1br3j")
+stretch_mode = 3
+
+[node name="girl" type="TextureButton" parent="CanvasLayer/Menu"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.5
+anchor_right = 0.75
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -95.5
+offset_right = 60.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("14_34gmv")
+texture_pressed = ExtResource("15_wbu5d")
+texture_hover = ExtResource("16_ixy5o")
+stretch_mode = 3
+
+[node name="Play" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -15.5
+offset_right = 20.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Help" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+offset_left = -22.0
+offset_top = -15.5
+offset_right = 22.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Help"
+
+[node name="Credits" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -31.5
+offset_top = -15.5
+offset_right = 31.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Menu"]
+libraries = {
+"": SubResource("AnimationLibrary_7htbw")
+}
+
+[node name="GameOver" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverMessage" type="Label" parent="CanvasLayer/GameOver"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+
+[node name="Score" type="Label" parent="CanvasLayer/GameOver"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.45
+anchor_right = 0.5
+anchor_bottom = 0.45
+offset_left = -24.0
+offset_top = -13.0
+offset_right = 24.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Got :"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOver"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.6
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -32.5
+offset_top = -15.5
+offset_right = 32.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[connection signal="killed" from="Player" to="." method="_on_player_killed"]
+[connection signal="play" from="CanvasLayer/Menu" to="." method="_on_menu_play"]
+[connection signal="pressed" from="CanvasLayer/Menu/boy" to="CanvasLayer/Menu" method="_on_boy_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/girl" to="CanvasLayer/Menu" method="_on_girl_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/Play" to="CanvasLayer/Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/RestartButton" to="CanvasLayer/Menu" method="_on_restart_button_pressed"]

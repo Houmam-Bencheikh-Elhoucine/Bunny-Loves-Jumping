@@ -1,0 +1,97 @@
+[gd_scene load_steps=16 format=3 uid="uid://di04seo5mohl5"]
+
+[ext_resource type="Script" path="res://Scripts/Collectibles/Coin.gd" id="1_01he8"]
+[ext_resource type="Texture2D" uid="uid://bi6hflnuho0g0" path="res://Assets/Items/bronze_1.png" id="2_eaq56"]
+[ext_resource type="Texture2D" uid="uid://c6u2bdrqsxhxk" path="res://Assets/Items/gold_1.png" id="2_lw12p"]
+[ext_resource type="Texture2D" uid="uid://ch1e4dsrbt85s" path="res://Assets/Items/gold_2.png" id="3_d0a0b"]
+[ext_resource type="Texture2D" uid="uid://bd2scp4wdcofv" path="res://Assets/Items/bronze_2.png" id="3_jgwqy"]
+[ext_resource type="Texture2D" uid="uid://c0lib7ojjr2m4" path="res://Assets/Items/bronze_3.png" id="4_k3un8"]
+[ext_resource type="Texture2D" uid="uid://sddbd426bj8k" path="res://Assets/Items/gold_3.png" id="4_yhmbu"]
+[ext_resource type="Texture2D" uid="uid://dif2cxtn727wl" path="res://Assets/Items/gold_4.png" id="5_eyo4k"]
+[ext_resource type="Texture2D" uid="uid://x60pnhy5pfvv" path="res://Assets/Items/bronze_4.png" id="5_wfjo8"]
+[ext_resource type="Texture2D" uid="uid://dq51nwqog7gqq" path="res://Assets/Items/silver_1.png" id="6_1p5bs"]
+[ext_resource type="Texture2D" uid="uid://dci0wm1xhne5n" path="res://Assets/Items/silver_2.png" id="7_fo5tj"]
+[ext_resource type="Texture2D" uid="uid://c0ut331mv8hw" path="res://Assets/Items/silver_3.png" id="8_yhwsj"]
+[ext_resource type="Texture2D" uid="uid://c8rd5y4ogl2b5" path="res://Assets/Items/silver_4.png" id="9_tc4mk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtnst"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_eaq56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jgwqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k3un8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wfjo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k3un8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jgwqy")
+}],
+"loop": true,
+"name": &"bronze",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lw12p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d0a0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yhmbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eyo4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yhmbu")
+}],
+"loop": true,
+"name": &"gold",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1p5bs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fo5tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yhwsj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tc4mk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yhwsj")
+}],
+"loop": true,
+"name": &"silver",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfli0"]
+radius = 40.0
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_01he8")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wtnst")
+animation = &"bronze"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.38419e-07)
+shape = SubResource("CircleShape2D_sfli0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
